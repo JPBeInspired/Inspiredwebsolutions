@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PackageCard = ({ 
   title, 
@@ -10,7 +11,8 @@ const PackageCard = ({
   description, 
   features, 
   isPopular = false,
-  ctaText = "Get Started"
+  ctaText = "Get Started",
+  ctaLink = "#"
 }) => {
   return (
     <Card className={`relative overflow-hidden transition-all duration-300 bg-gray-900/50 backdrop-blur-sm border-gray-800 ${
@@ -45,15 +47,17 @@ const PackageCard = ({
         </ul>
       </CardContent>
       <CardFooter>
-        <Button 
-          className={`w-full ${
-            isPopular 
-              ? 'bg-brand-500 hover:bg-brand-600 text-white' 
-              : 'bg-gray-800 hover:bg-gray-700 text-white'
-          }`}
-        >
-          {ctaText} <ArrowRight size={16} className="ml-2" />
-        </Button>
+        <Link to={ctaLink} className="w-full">
+          <Button 
+            className={`w-full ${
+              isPopular 
+                ? 'bg-brand-500 hover:bg-brand-600 text-white' 
+                : 'bg-gray-800 hover:bg-gray-700 text-white'
+            }`}
+          >
+            {ctaText} <ArrowRight size={16} className="ml-2" />
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
@@ -76,7 +80,8 @@ const PackagesSection = () => {
         "CMS for easy updates"
       ],
       isPopular: false,
-      ctaText: "Browse Templates"
+      ctaText: "See More",
+      ctaLink: "/starter-package"
     },
     {
       title: "Semi-Custom Website",
@@ -93,7 +98,8 @@ const PackagesSection = () => {
         "Maintenance & support options"
       ],
       isPopular: true,
-      ctaText: "Get Started"
+      ctaText: "Get Started",
+      ctaLink: "#"
     },
     {
       title: "Premium Custom",
@@ -110,7 +116,8 @@ const PackagesSection = () => {
         "Premium support & maintenance"
       ],
       isPopular: false,
-      ctaText: "Book Consultation"
+      ctaText: "Book Consultation",
+      ctaLink: "#"
     }
   ];
 
@@ -134,11 +141,11 @@ const PackagesSection = () => {
         
         <div className="mt-16 text-center">
           <p className="text-gray-400 mb-4">Not sure which package is right for you?</p>
-          <Button variant="outline" className="border-gray-700 text-white hover:bg-gray-800" asChild>
-            <a href="#quiz" className="inline-flex items-center">
-              Take Our Quick Quiz <ArrowRight size={16} className="ml-2" />
-            </a>
-          </Button>
+          <Link to="/starter-package">
+            <Button variant="outline" className="border-gray-700 text-white hover:bg-gray-800">
+              See More
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
